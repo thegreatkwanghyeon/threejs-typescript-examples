@@ -27,7 +27,7 @@ jobs:
       - name: Test code
         run: npm test
       
-      - name: if fail
+      - name: Close PR
         uses: actions/github-script@v3
         with:
           github-token: ${{secrets.REPO_ACCESS_TOKEN}}
@@ -48,4 +48,17 @@ jobs:
               state:  "closed"
             })
         if: failure()
+      - name: Merge PR
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.REPO_ACCESS_TOKEN}}
+          script: |
+            const ref = "${{github.ref}}"
+            const pull_number = Number(ref.split("/")[2])
+            
+            await github.pulls.merge({
+              ...context.repo,
+              pull_number
+            })
+        if: success()
             
