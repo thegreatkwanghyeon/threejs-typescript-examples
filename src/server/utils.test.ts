@@ -8,4 +8,8 @@ describe('greet', () => {
     it('should return greeting string with given word', () => {
         expect(greet('typescript')).toBe('Hello typescript!')
     })
+
+    it('this test should be failed', () => {
+        expect(greet('fail')).toBe('Hello success!')
+    })
 })
