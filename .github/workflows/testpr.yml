@@ -39,7 +39,7 @@ jobs:
               ...context.repo,
               pull_number,
               body: "Test has failed.",
-              event: "REQUEST_CHANGES" 
+              event: "COMMENT" 
             })
             
             await github.pulls.update({
